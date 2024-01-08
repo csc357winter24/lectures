@@ -1,0 +1,15 @@
+.DS_Store
+*.icloud
+*.swp
+*.o
+*.dSYM
+*.aux
+*.log
+*.nav
+*.out
+*.snm
+*.toc
+*.vrb
+*.cpt
+.pnico
+.student/*.mov
