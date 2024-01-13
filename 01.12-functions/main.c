@@ -9,7 +9,6 @@ int main(void) {
 
     printf("Enter an integer: ");
     scanf("%d", &x);
-
     printf("Enter an integer: ");
     scanf("%d", &y);
 
@@ -18,4 +17,3 @@ int main(void) {
 
     return 0;
 }
-

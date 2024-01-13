@@ -4,7 +4,7 @@
 #       contents of the header files will already have been copied into the
 #       source files.
 
-# To compile object files into an executable:
+# To compile object files into a named executable file:
 add: main.o add.o
 	gcc -o add main.o add.o
 
