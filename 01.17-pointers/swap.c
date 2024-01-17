@@ -1,7 +1,12 @@
+#include <stdio.h>
 #include "swap.h"
 
-void swap(int x, int y) {
-    int temp = x;
-    x = y;
-    y = temp;
+/* To define a function, taking two pointers to integers as parameters: */
+void swap(int *x, int *y) {
+    int temp = *x;
+    *x = *y;
+    *y = temp;
+
+    printf("x (%p): %p\n", (void *)&x, (void *)x);
+    printf("y (%p): %p\n", (void *)&y, (void *)y);
 }
