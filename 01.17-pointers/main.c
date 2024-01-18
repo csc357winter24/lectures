@@ -4,8 +4,11 @@
 int main(void) {
     int z = 1, w = 2;
 
-    swap(z, w);
-    printf("z: %d, w: %d\n", z, w);
+    /* To call a function, passing two pointers to integers as arguments: */
+    swap(&z, &w);
+    
+    printf("z (%p): %d\n", (void *)&z, z);
+    printf("w (%p): %d\n", (void *)&w, w);
 
     return 0;
 }
