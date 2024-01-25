@@ -31,44 +31,41 @@ def set(lst, idx, value):
 #       a List as an argument:
 def add(lst, idx, value):
     # Create a new node to contain the value.
-    # If the idx is equal to 0, then:
+    # If idx is equal to 0, then:
     #     Set the new node's next to the lst's head.
-    #     Set lst's head to the new node.
+    #     Set the lst's head to the new node.
     # Else, do:
-    #     Set a tmp variable equal to lst's head.
-    #     For i from 0 to idx - 1, do:
-    #         Set tmp equal to tmp's next.
-    #     Set the new node's next to tmp's next.
-    #     Set tmp's next to the new node.
-    # Increment the lst's size.
+    #     Set a tmp variable to the lst's head.
+    #     For i from 0 to (idx - 1), do:
+    #         Set the tmp to the tmp's next.
+    #     Set the new node's next to the tmp's next.
+    #     Set the tmp's next to the new node.
+    # Increment the size.
     pass
 
 
 # NOTE: The nodes in a linked list are recursively defined:
-#         * A single node is the head of a list of 1 element.
-#         * If a node is the head of a list of n elements, then a new node with
-#           that node as its successor is the head of a list of n+1 elements.
-#       ...the NODES are recursively defined, but the LIST itself is not.
+#         * A single node is the head of a list containing 1 element.
+#         * If a node is the head of a list containing n elements, then a new
+#           node whose successor is that existing node is the head of a list
+#           containing (n + 1) elements.
+#       ...the NODES are recursive, but the LIST is not.
 def remove(lst, idx):
-    # If the idx is equal to 0, then:
-    #     Set the lst's head to the lst's head's next.
-    # Else, do:
-    #     (find the previous node, etc... -- see above)
-    #
-    #  or
-    #
-    # Call _remove on the lst's head.
+    lst.head = _remove(lst.head, idx)
     # Decrement the size.
     pass
 
 
+# NOTE: The input is a node; the output is the node that ought to take its
+#       after the remove operation is completed.
 def _remove(node, idx):
-    # If idx is equal to 0, then:
-    #     Return the node's next -- the next node takes the place of the
-    #      current (now removed) node.
+    # If idx is equal to 0:
+    #     Return the node's next -- the node that ought to take its place now
+    #      that it has been removed.
     # Else, do:
-    #     Set the node's next to the result of recursing on the node's next
-    #      with idx - 1 -- that is, the node that takes the place of the
-    #      current (NOT removed) node's next.
-    #     Return the current (NOT removed) node -- nothing takes its place.
+    #     Recurse on the node's next and (idx - 1) -- this returns the node
+    #      that ought to take the next's place.
+    #     Set the node's next to the result of recursing.
+    #     Return the node -- it has not been removed, so it ought to take its
+    #      own place; nothing replaces it.
     pass
