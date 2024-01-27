@@ -35,14 +35,16 @@ def insert(dct, key, value):
     #     Create a new array -- ideally, the new capacity would be a prime
     #      roughly twice the old capacity, but often ((2 * capacity) + 1) is
     #      a reasonable approximation.
-    #     Rehash and re-insiert all existing key-value pairs -- their indices
-    #      were computed mod the old capacity; they will need new indices.
+    #     Rehash and re-insert all existing key-value pairs -- their indices
+    #      were computed mod the old capacity, so they will need new indices.
+    #
     # Hash the given key and mod it by the dct's capacity.
     # If the dct's array at that index is None, then:
     #     Create a new node containing the given key and value.
     #     Set the new node's next to None.
     #     Set the dct's array at that index to the new node.
     #     Increment the size.
+    #
     # Else, do:
     #     Set a tmp variable to the dct's array at that index -- this is the
     #      head of a non-empty linked list.
