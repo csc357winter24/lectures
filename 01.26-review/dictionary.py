@@ -27,25 +27,25 @@ def get(dct, key):
 
 
 def insert(dct, key, value):
-    # If the dct's size is equal to the dct's capacity, then:
+    # If the dct's size is equal to its capacity, then:
     #
     #     NOTE: If there are more key-value pairs than there are locations in
     #           the backing array, then a collision is inevitable.
     #
-    #     Create a new array -- ideally, the new array's length would be a
-    #      prime number that is roughly double the current array's capacity,
-    #      but often ((2 * capacity) + 1) is a reasonable approximation.
-    #     Re-insert every existing key-value pair -- we've changed the
-    #      capacity, so the indices must change as well.
-    # Hash the key and mod it by the dct's capacity.
-    # If the array at that hash code is None, then:
+    #     Create a new array -- ideally, the new capacity would be a prime
+    #      roughly twice the old capacity, but often ((2 * capacity) + 1) is
+    #      a reasonable approximation.
+    #     Rehash and re-insiert all existing key-value pairs -- their indices
+    #      were computed mod the old capacity; they will need new indices.
+    # Hash the given key and mod it by the dct's capacity.
+    # If the dct's array at that index is None, then:
     #     Create a new node containing the given key and value.
     #     Set the new node's next to None.
-    #     Set the array at that hash code to the new node.
+    #     Set the dct's array at that index to the new node.
     #     Increment the size.
     # Else, do:
-    #     Set a tmp variable the array at that hash code -- this will be the
-    #      head of a linked list containing all existing colliding keys.
+    #     Set a tmp variable to the dct's array at that index -- this is the
+    #      head of a non-empty linked list.
     #     While the tmp's key is not equal to the given key:
     #         If the tmp's next is None, then:
     #             Create a new node containing the given key.
