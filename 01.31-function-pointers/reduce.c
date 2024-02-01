@@ -2,13 +2,13 @@
 #include "add.h"
 #include "mult.h"
 
-/* To declare that function... */
-int reduce(int[], int, int (*)(int, int));
+/* To declare a function... */
+int reduce(int [], int, int (*)(int, int));
 
 int main(void) {
     int arr[] = {1, 2, 3, 4};
 
-    /* To call that function... */
+    /* To call a function... */
     printf("reduce(arr, 4, &add): %d\n", reduce(arr, 4, &add));
     printf("reduce(arr, 4, &mult): %d\n", reduce(arr, 4, &mult));
 
@@ -22,7 +22,6 @@ int reduce(int arr[], int length, int (*fn)(int, int)) {
     int i, sum = arr[0];
 
     for (i = 1; i < length; i++) {
-        /* To call a pointer to a function: */
         sum = (*fn)(sum, arr[i]);
     }
 
