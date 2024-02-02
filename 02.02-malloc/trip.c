@@ -17,7 +17,12 @@ int main(void) {
 }
 
 int *trip(int a, int b, int c) {
-    int arr[3];
+    int *arr;
+
+    /* To allocate space for three integers on the heap -- this memory is
+     *  independent of the conventions of the runtime stack, and will not be
+     *  deallocated on return, so a pointer to it is safe to return: */
+    arr = (int *)malloc(sizeof(int) * 3);
 
     arr[0] = a;
     arr[1] = b;
