@@ -13,11 +13,19 @@ int main(void) {
     printf(" |- %p: %d\n", (void *)&arr[1], arr[1]);
     printf(" +- %p: %d\n", (void *)&arr[2], arr[2]);
 
+    /* Since we allocated the memory pointed to by arr independently of the 
+     *  compiler's conventions, we are responsible for deallocating it: */
+    free(arr);
+
     return 0;
 }
 
 int *trip(int a, int b, int c) {
-    int arr[3];
+    int *arr;
+
+    /* To allocate space for three integers on the heap, independently of the
+     *  runtime stack, and thus safe to return: */
+    arr = (int *)malloc(sizeof(int) * 3);
 
     arr[0] = a;
     arr[1] = b;
