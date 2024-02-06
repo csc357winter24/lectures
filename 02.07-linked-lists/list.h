@@ -13,5 +13,6 @@ typedef struct List {
 List *lstcreate();
 void lstdestroy(List *);
 void *lstget(List *, int);
+int lstset(List *, int, void *);
 int lstadd(List *, int, void *);
 void *lstremove(List *, int);
