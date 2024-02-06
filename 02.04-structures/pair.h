@@ -4,6 +4,6 @@ struct Pair {
     int second;
 };
 
-/* The type defined by the above definition is "struct Pair", not "Pair"; if we
- *  wish to refer to it as simply "Pair", we can introduce a new name: */
+/* The type defined above is "struct Pair", not "Pair"; to define "Pair", we
+ *  can define it as an alternative name for "struct Pair": */
 typedef struct Pair Pair;
