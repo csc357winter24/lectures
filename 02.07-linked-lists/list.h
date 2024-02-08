@@ -1,7 +1,9 @@
 /* Node: Represents an element in a linked list. */
 typedef struct Node {
-    /* In order for this list to contain data of any type, the values must be
-     *  void pointers -- pointers that can point to anything: */
+    /* A void pointer can point to anything -- if this were instead declared
+     *  as an int, for example, then the list would only ever be able to
+     *  contain ints. We don't know what it points to, but that's okay, because
+     *  we just need to store it; we never need to dereference it. */
     void *value;
     struct Node *next;
 } Node;

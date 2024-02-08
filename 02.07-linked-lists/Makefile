@@ -4,10 +4,10 @@
 CFLAGS = -Wall -Wextra -ansi -pedantic
 
 list.o: list.c list.h
-	gcc $(CFLAGS) -c list.c
+	gcc $(CFLAGS) -Werror -c list.c
 
-test: list.o
-	gcc $(CFLAGS) list.o listtests.c
+test:
+	gcc $(CFLAGS) list.c listtests.c
 	./a.out
 
 debug:

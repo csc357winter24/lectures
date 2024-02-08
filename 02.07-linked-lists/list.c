@@ -5,8 +5,8 @@
 List *lstcreate() {
     List *lst = (List *)malloc(sizeof(List));
 
-    /* The compiler and standard library do not and cannot know what a List is
-     *  or how it should be initialized -- this is just 12 random bytes. */
+    /* The standard library does not and cannot know what this dynamically
+     *  allocated memory represents; it is our job to initialize it. */
     lst->head = NULL;
     lst->size = 0;
 
@@ -19,9 +19,8 @@ void lstdestroy(List *lst) {
     int i;
 
     for (i = 0; i < lst->size; i++) {
-        /* Once a node is freed, its memory is no longer reserved for it, and
-         *  could be overwritten with new data, so we must save the "next"
-         *  pointer before freeing the node. */
+        /* Once we free tmp, we have idea what its memory contains, so if we
+         *  care about tmp->next, we must save it first. */
         Node *next = tmp->next;
         free(tmp);
         tmp = next;
