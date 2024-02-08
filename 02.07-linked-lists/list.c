@@ -15,7 +15,16 @@ List *lstcreate() {
 
 /* lstdestroy: Destroys an existing linked list. */
 void lstdestroy(List *lst) {
-    /* TODO: Must also free the nodes within the list... */
+    Node *tmp = lst->head;
+    int i;
+
+    for (i = 0; i < lst->size; i++) {
+        /* Once we free tmp, we have idea what its memory contains, so if we
+         *  care about tmp->next, we must save it first. */
+        Node *next = tmp->next;
+        free(tmp);
+        tmp = next;
+    }
 
     free(lst);
 }
