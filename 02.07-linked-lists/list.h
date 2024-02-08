@@ -1,5 +1,7 @@
 /* Node: Represents an element in a linked list. */
 typedef struct Node {
+    /* In order for this list to contain data of any type, the values must be
+     *  void pointers -- pointers that can point to anything: */
     void *value;
     struct Node *next;
 } Node;

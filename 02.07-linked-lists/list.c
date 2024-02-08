@@ -3,12 +3,31 @@
 
 /* lstcreate: Creates an empty linked list. */
 List *lstcreate() {
-    return NULL;
+    List *lst = (List *)malloc(sizeof(List));
+
+    /* The compiler and standard library do not and cannot know what a List is
+     *  or how it should be initialized -- this is just 12 random bytes. */
+    lst->head = NULL;
+    lst->size = 0;
+
+    return lst;
 }
 
 /* lstdestroy: Destroys an existing linked list. */
 void lstdestroy(List *lst) {
-    return;
+    Node *tmp = lst->head;
+    int i;
+
+    for (i = 0; i < lst->size; i++) {
+        /* Once a node is freed, its memory is no longer reserved for it, and
+         *  could be overwritten with new data, so we must save the "next"
+         *  pointer before freeing the node. */
+        Node *next = tmp->next;
+        free(tmp);
+        tmp = next;
+    }
+
+    free(lst);
 }
 
 /* lstget: Gets an element in a linked list. */
@@ -23,6 +42,29 @@ int lstset(List *lst, int idx, void *value) {
 
 /* lstadd: Adds an element to a linked list. */
 int lstadd(List *lst, int idx, void *value) {
+    Node *node = (Node *)malloc(sizeof(Node));
+    node->value = value;
+
+    if (idx == 0) {
+        node->next = lst->head;
+        lst->head = node;
+    }
+    else {
+        Node *tmp = lst->head;
+        int i;
+
+        for (i = 0; i < idx - 1; i++) {
+            tmp = tmp->next;
+        }
+
+        node->next = tmp->next;
+        tmp->next = node;
+    }
+
+    lst->size++;
+
+    /* If we wanted to check for indexing out-of-bounds, we might return
+     *  something other than 0 if idx < 0 or idx > lst->size. */
     return 0;
 }
 
