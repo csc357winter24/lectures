@@ -6,10 +6,8 @@ CFLAGS = -Wall -Wextra -ansi -pedantic
 list.o: list.c list.h
 	gcc $(CFLAGS) -Werror -c list.c
 
-test:
-	gcc $(CFLAGS) list.c listtests.c
-	./a.out
-
 debug:
 	gcc $(CFLAGS) -g list.c listtests.c
+
+test: debug
 	valgrind --leak-check=full --show-leak-kinds=all ./a.out
