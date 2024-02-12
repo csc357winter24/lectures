@@ -1,3 +1,7 @@
+/* Copies the contents of one file into another using standard library
+ *  functions -- these functions provide additional abstractions on top of
+ *  system calls, encapsulating the most commonly desired functionality. */
+
 #include <stdio.h>
 
 #define SIZE 16
