@@ -4,7 +4,7 @@ CFLAGS = -Wall -Wextra -std=gnu11 -pedantic
 
 all: copy fcopy
 
-# This adds -g to the CFLAGS variable when building the debug target:
+# This adds the -g flag to the CFLAGS variable when building the debug target:
 debug: CFLAGS += -g
 debug: clean all
 
@@ -14,8 +14,7 @@ copy: copy.o
 fcopy: fcopy.o
 	gcc -o fcopy fcopy.o
 
-# This instructs Make to build any .o file by using a .c file with the exact
-#  same name:
+# This builds any .o file using the .c file of the same name:
 %.o: %.c
 	gcc $(CFLAGS) -c $<
 

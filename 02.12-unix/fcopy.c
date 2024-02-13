@@ -14,6 +14,10 @@ int main(int argc, char *argv[]) {
     src = fopen(argv[1], "r");
     dest = fopen(argv[2], "w");
 
+    /* Behind the scenes, fread maintains its own buffer -- it reads more
+     *  characters than we initially ask for, so as to limit system calls.
+     *  Future calls to fread will likely not call read; they'll just copy from
+     *  fread's internal buffer. */
     while ((n = fread(buf, sizeof(char), SIZE, src)) > 0) {
         fwrite(buf, sizeof(char), n, dest);
     }

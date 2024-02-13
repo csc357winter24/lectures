@@ -3,11 +3,11 @@
 #include <fcntl.h>
 #include <unistd.h>
 
-/* A system call is more expensive than an ordinary function call: a system
- *  call has to temporarily increase the process's privilege and securely
- *  transfer control to and from the OS. Increasing the size of the buffer does
- *  not decrease the number of characters read and written, but it does
- *  decrease the number of system calls that have to be made. */
+/* Increasing the size of the buffer does not decrease the number of characters
+ *  that have to be copied, but it reduces the number of system calls that have
+ *  to be made to copy them -- a system call is more expensive than an ordinary
+ *  function. A system call has to temporarily increase privilege and securely
+ *  transfer control to and from the OS. */
 #define SIZE 4096
 
 int main(int argc, char *argv[]) {
@@ -20,7 +20,6 @@ int main(int argc, char *argv[]) {
 
     src = open(argv[1], O_RDONLY);
     dest = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
-
 
     /* The read, write, and close system calls expect integer file descriptors,
      *  not pointers to FILE structures: */
