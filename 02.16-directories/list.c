@@ -15,11 +15,6 @@ int main(int argc, char *argv[]) {
      *  inside of the program instead of before we run the program): */
     chdir(argv[1]);
 
-    /* Directories are special: they are files, but we probably don't want to
-     *  read from them like ordinary files, and we are not allowed to write to
-     *  them like ordinary files. */
-    dir = opendir(".");
-
     /* In theory, we could read through the directory as though it were a file,
      *  but the format of a directory is not standardized, and we probably
      *  cannot or do not want to do that manually. */
