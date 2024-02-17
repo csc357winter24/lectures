@@ -20,17 +20,24 @@ int main(int argc, char *argv[]) {
      *  them like ordinary files. */
     dir = opendir(".");
 
-    /* To read from a directory is to iterate over its entries, each of which
-     *  is a filename-to-inode mapping: */
+    /* In theory, we could read through the directory as though it were a file,
+     *  but the format of a directory is not standardized, and we probably
+     *  cannot or do not want to do that manually. */
+    dir = opendir(".");
+
+    /* To read from a directory is to iterate over its mappings -- readdir is
+     *  essentially fgets, but for directories. */
     while ((entry = readdir(dir)) != NULL) {
-        /* Note that a dirent is only guaranteed to contain a filename and an
-         *  inode. Further note that a dirent is only guaranteed to persist
-         *  until the directory is closed or readdir is called again; if we
-         *  needed the name, we should save a copy ourselves. If we want any
-         *  more information about a file, now that we have its filename, we
-         *  can stat it: */
+        /* Note that a dirent is only guaranteed to contain a filename and the
+         *  inode number to which it maps. Any other information ought to be
+         *  gleaned by using the filename to stat the file. */
         stat(entry->d_name, &buf);
         printf("%s -> %ld (%d bytes)\n", entry->d_name, entry->d_ino, buf.st_size);
+
+        /* Further note that the contents of a dirent are only guaranteed to
+         *  persist until the directory is closed or readdir is called again.
+         *  If we need any of that information later, we need to allocate a
+         *  copy ourselves. */
     }
 
     closedir(dir);
