@@ -14,9 +14,9 @@ int main(int argc, char *argv[]) {
 
     for (i = 2; i < argc; i++) {
         if (!fork()) {
-            /* It is vitally important that we know which is the parent and
-             *  which is the child -- the child cannot be allowed to loop
-             *  again; the child must avoid forking any children of its own. */
+            /* It is crucially important that we know which is the parent and
+             *  which is the child -- the child CANNOT be allowed to loop
+             *  again; the child MUST avoid forking any children of its own. */
             return fsearch(argv[i], argv[1]);
         }
         else {
