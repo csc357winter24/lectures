@@ -12,6 +12,26 @@ int fsearch(char *, char *);
 int main(int argc, char *argv[]) {
     int i, status = EXIT_FAILURE, tmp;
 
+    for (i = 2; i < argc; i++) {
+        if (!fork()) {
+            /* It is crucially important that the child DOES NOT go around to
+             *  the next iteration of the loop; we do NOT want the child to
+             *  make any grandchildren; we want it to return as soon as it is
+             *  done with its search. */
+            return fsearch(argv[i], argv[1]);
+        }
+        else {
+            /* Although the parent must eventually wait for the child, doing
+             *  so here would be no better than searching all of the files
+             *  sequentially -- we want to move on to the next file instead
+             *  of waiting. */
+        }
+    }
+
+    for (i = 2; i < argc; i++) {
+        wait(NULL);
+    }
+
     return status;
 }
 
