@@ -5,8 +5,8 @@
 #include <signal.h>
 
 void handler(int signum) {
-    /* We don't actually need to do anything in this handler; we just need
-     *  to know that the signal went off. */
+    /* This handler doesn't actually have to do anything, we just need to
+     *  change the default response to SIGALRM, which is to terminate. */
 }
 
 int main(void) {
