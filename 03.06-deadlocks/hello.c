@@ -4,10 +4,10 @@
 int main(void) {
     char buf[16];
 
-    /* Note that this process is entirely unaware that pipes might exist. It
-     *  simply interacts with stdin and stdout. If we want to communicate with
-     *  it from another process, we will have to "trick" it into thinking that
-     *  pipes are actually stdin and/or stdout. */
+    /* This program has no idea that pipes might be involved -- it simply
+     *  expects to use stdin and stdout. We will have to replace stdin and/or
+     *  stdout with pipes in order to "trick" this program into using the
+     *  pipes instead... */
 
     while (fgets(buf, 16, stdin) != NULL) {
         buf[strlen(buf) - 1] = '\0';
