@@ -14,11 +14,13 @@ int main(void) {
     if (!fork()) {
         /* By replaceing stdin and stdout with pipes, we "trick" the child
          *  process into using the pipes instead of the terminal. */
-
         dup2(ptoc[0], STDIN_FILENO);
+        dup2(ctop[1], STDOUT_FILENO);
+
+        close(ptoc[0]);
         close(ptoc[1]);
         close(ctop[0]);
-        dup2(ctop[1], STDOUT_FILENO);
+        close(ctop[1]);
 
         execlp("./hello", "./hello", NULL);
         perror("execlp");

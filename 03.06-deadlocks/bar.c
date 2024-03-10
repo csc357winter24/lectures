@@ -13,10 +13,13 @@ int main(void) {
     pipe(ctop);
 
     if (!fork()) {
-        close(ptoc[1]);
-        close(ctop[0]);
         dup2(ptoc[0], STDIN_FILENO);
         dup2(ctop[1], STDOUT_FILENO);
+
+        close(ptoc[0]);
+        close(ptoc[1]);
+        close(ctop[0]);
+        close(ctop[1]);
 
         execlp("./hello", "./hello", NULL);
         perror("execlp");
@@ -28,7 +31,7 @@ int main(void) {
 
         close(ptoc[0]);
         close(ctop[1]);
-        
+
         /* At this point, both parent and child plan to send and receive data
          *  to and from one another, but they can't both start by receiving,
          *  otherwise they would be deadlocked waiting on other to send.
