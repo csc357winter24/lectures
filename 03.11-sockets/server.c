@@ -19,19 +19,20 @@ int main(int argc, char *argv[]) {
     hints.ai_flags = AI_PASSIVE;
     getaddrinfo(NULL, argv[1], &hints, &addr);
 
-    /* The server must then bind its created socket to a specific port, so that
-     *  the client knows which port to use when establishing a connection: */
+    /* Use that information to create a socket and bind it to a specific port;
+     *  clients will need to know this port to establish connections. */
     fd = socket(addr->ai_family, addr->ai_socktype, addr->ai_protocol);
     bind(fd, addr->ai_addr, addr->ai_addrlen);
 
-    /* For the sake of simplicity, we will assume that only one client will
-     *  ever attempt to connect: */
+    /* Listen for new connections on the bound port; for simplicity, we'll
+     *  assume that only one client will ever attempt to connect. If we had to
+     *  handle multiple clients, we could request that they be queued up. */
     listen(fd, 1);
 
-    /* If we wanted to know details of the client that we're accepting -- for
-     *  example, if we only wanted to receive from certain IP addresses -- we
-     *  could pass pointers to structures as the second and third arguments,
-     *  and those structures will get populated with client details. */
+    /* Accept the next new connection. If we wanted to know whose connection we
+     *  just accepted, we could pass additional pointers to structures which
+     *  will be populated with information about the client, for example, if we
+     *  only wanted to talk to clients with certain IP addresses. */
     client = accept(fd, NULL, NULL);
 
     /* Note that accept creates a new socket, so that the existing socket
