@@ -20,17 +20,17 @@ int main(int argc, char *argv[]) {
     /* Create a socket bound to that port and listen for new connections: */
     fd = socket(addr->ai_family, addr->ai_socktype, addr->ai_protocol);
     bind(fd, addr->ai_addr, addr->ai_addrlen);
-    listen(fd, 1);
+    listen(fd, 16);
 
     /* Add the listening socket to the array of polled descriptors: */
     clients[0].fd = fd;
     clients[0].events = POLLIN;
     n = 1;
 
-    /* Run until no clients connect for 10 seconds: */
+    /* Run until there are no clients for at least 10 seconds: */
     while (poll(clients, n, n > 1 ? -1 : 10000) > 0) {
-        /* Note that poll returns the *number* of descriptors that have data
-         *  to be read, not *which* descriptor. */
+        /* Note that poll returns the *number* of descriptors with data ready,
+         *  not *which* descriptors have data ready... */
         for (i = 0; i < n; i++) {
             if (clients[i].revents & POLLIN) {
                 if (clients[i].fd == fd) {
@@ -52,9 +52,9 @@ int main(int argc, char *argv[]) {
                         write(STDOUT_FILENO, buf, m);
                     }
 
-                    /* With the connections made non-blocking, we can
-                     *  distinguish between "no data for now" and "no data
-                     *  will ever come in the future": */
+                    /* With the sockets made non-blocking, we can distinguish
+                     *  between "no data available at the moment" and "no data
+                     *  will ever be available in the future". */
                     if (m == 0) {
                         close(clients[i].fd);
                         clients[i] = clients[n - 1];
